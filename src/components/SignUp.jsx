@@ -2,11 +2,9 @@ import { useState } from "react"
 
 
 
-export default function Login() {
+export default function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -23,7 +21,7 @@ export default function Login() {
     return (
         <>
         <form onSubmit={handleSubmit}>
-           <h3>login</h3> 
+           <h3>sign up</h3> 
            <label>username:</label>
            <input
            value={username}
@@ -38,6 +36,7 @@ export default function Login() {
             setPassword(e.target.value);
            }}
            /> <br />
+           
            <button type="submit">submit</button>
         </form>
         </>
