@@ -1,25 +1,40 @@
 import { useState } from "react"
-
+import { authenticate } from "../API";
 
 
 export default function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    function handleSubmit(e) {
+
+    async function handleSubmit(e) {
         e.preventDefault();
 
         console.log({username, password});
-        authenticate();
-    }
+        // authenticate();
+     try {
+        const { successMessage, error } = await authenticate({ token });
 
-    function resetForm() {
-        setUsername("");
-        setPassword("");
+        if (successMessage) {
+            console.log(successMessage);
+
+        } else if (error) {
+            console.error(error);
+        }
+        
+
+    } catch (error) {
+        console.error(error);
     }
+}
+
+    // function resetForm() {
+    //     setUsername("");
+    //     setPassword("");
+    // }
 
     return (
-        <>
+        <div id="form">
         <form onSubmit={handleSubmit}>
            <h3>sign up</h3> 
            <label>username:</label>
@@ -28,17 +43,19 @@ export default function SignUp() {
            onChange={(e) => {
             setUsername(e.target.value);
            }}
-           /> <br />
+           /> {" "}
+           <br />
            <label>password:</label>
            <input
            value={password}
            onChange={(e) => {
             setPassword(e.target.value);
            }}
-           /> <br />
+           /> {" "}
+           <br />
            
            <button type="submit">submit</button>
         </form>
-        </>
-    )
+        </div>
+    );
     }

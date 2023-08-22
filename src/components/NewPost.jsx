@@ -25,6 +25,7 @@ export default function NewPost({posts, setPosts}) {
     }
 
     return (
+        <div id="form">
     <form onSubmit={handleSubmit}>
         {error && <p>{error}</p>}
         <label>item: </label>
@@ -62,5 +63,6 @@ export default function NewPost({posts, setPosts}) {
           }} /> <br />
         <button>Submit</button>
         </form>
+        </div>
     )
 }

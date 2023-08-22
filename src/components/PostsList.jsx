@@ -1,11 +1,12 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { deletePost } from "../API";
 
 
 export default function PostsList ({ post }) {
     const navigate = useNavigate();
     return (
-        <div>
+        <div id="posts">
             {/* <h3>{post._id}</h3> */}
             <p>{post.username}</p>
             <h3>{post.title}</h3>
@@ -18,6 +19,7 @@ export default function PostsList ({ post }) {
             >
                 See Details 
                 </button>
+          
         </div>
     );
 }

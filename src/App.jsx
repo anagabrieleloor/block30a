@@ -33,7 +33,7 @@ function App() {
 
 function Home() {
   return (
-    <div>
+    <div id="home">
   <Login />
   
   <Link to ="/signup">Sign Up</Link>

@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 
 
 const cohortName = "2306-ghp-et-web-ft-sf";
@@ -8,7 +9,7 @@ const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 //fetch posts 
 
 export const fetchPosts = async () => {
-    
+
     try {
         const response = await fetch(`${API_URL}/posts`)
 
@@ -18,7 +19,7 @@ export const fetchPosts = async () => {
     } catch (err) {
         console.error(err);
     }
-    
+
 };
 
 //fetch single post
@@ -37,7 +38,7 @@ export async function fetchSinglePost(id) {
 
 //POST /users/register
 
-export const registerUser = async ( )=> {
+export const registerUser = async () => {
     try {
         const response = await fetch(`${API_URL}/users/register`, {
             method: "POST",
@@ -57,7 +58,7 @@ export const registerUser = async ( )=> {
     } catch (err) {
         console.error(err);
     }
-    };
+};
 
 
 //login 
@@ -77,13 +78,18 @@ export const login = async () => {
         });
         const result = await response.json();
         console.log(result);
-        return result 
+        return result
+
+        if (result.success) {
+            setSuccessMessage("yippeee");
+            Navigate(`${API_URL}/posts`)
+        }
     } catch (err) {
         console.error(err);
     }
 }
 
- 
+
 //new posts 
 export const newPost = async () => {
     try {
@@ -108,7 +114,7 @@ export const newPost = async () => {
     } catch (err) {
         console.error(err);
     }
-    }
+}
 
 //delete posts 
 export async function deletePost(id) {
@@ -125,20 +131,45 @@ export async function deletePost(id) {
 
 //authenticate
 
-export const authenticate = async (token) => {
+export const authenticate = async ({ token }) => {
+
+    // export const authenticate = async (username, password) => {
     try {
         const response = await fetch(`${API_URL}/signup`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({username, password})
+            //   method: "POST",
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            // body: JSON.stringify({ username, password })
         });
         const result = await response.json();
         console.log(result);
+
+        return { successMessage: result.message, error: null };
+    } catch (err) {
+        console.error(err);
+        // const token = result.token;
+        // return token;
+    return { successMessage: null, error: "waaa >.<"};
+    }
+    
+}
+
+export const myData = async () => {
+
+    try {
+        const response = await fetch(`${BASE_URL}/users/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN_STRING_HERE}`
+            },
+        });
+        const result = await response.json();
+        console.log(result);
+        return result
     } catch (err) {
         console.error(err);
     }
 }
-

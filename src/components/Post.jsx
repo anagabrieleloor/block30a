@@ -31,13 +31,14 @@ export default function Post() {
         posts.content.toLowerCase().includes(searchParam)
         )
         : posts;
+        
     
 
     return (
         <div>
             
-            <div>
-            <h1>Posts</h1>
+            <div id="postandsearch">
+            <h2>Posts</h2>
                 <label>
                     Search:{" "}
                     <input 

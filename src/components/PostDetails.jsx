@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deletePost } from "../API";
 
 // import styles from "../css/PlayerCard.module.css";
@@ -7,6 +7,10 @@ import { deletePost } from "../API";
 
 export default function PostDetails({ post }) {
     const navigate = useNavigate();
+    const { postId } = useParams();
+    const matchedPost = posts.find((post) => {
+        return post._id == postId
+    });
 
     async function handleDelete() {
         try {
@@ -18,7 +22,9 @@ export default function PostDetails({ post }) {
         }
     }
     return (
+            
         <div>
+            <h1>{matchedPost._id}: {postId}</h1>
             <figure>
             <h3>{post._id}</h3>
             <p>{post.username}</p>
